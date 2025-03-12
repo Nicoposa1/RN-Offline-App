@@ -10,9 +10,14 @@ export const TaskList = () => {
     setTasks([
       { description: "First task" },
       { description: "Second task" },
-      { description: "Third task" },
     ]);
   }, []);
+
+  const createTask = () => {
+    setTasks([...tasks, { description: newTask }]);
+    setNewTask("");
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Todo</Text>
@@ -28,7 +33,7 @@ export const TaskList = () => {
         onChangeText={setNewTask}
         placeholderTextColor={'gray'}
       />
-      <Button title="Add" onPress={() => setTasks([...tasks, { description: newTask }])} />
+      <Button title="Add" onPress={createTask} />
     </View>
   )
 };

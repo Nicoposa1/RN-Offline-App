@@ -1,15 +1,12 @@
-import { SafeAreaView, StyleSheet, View } from 'react-native';
-
-import { TaskListItem } from '@/src/components/TaskListItem';
-import { TaskList } from '@/src/components/TaskList';
+import { SafeAreaView, StatusBar, StyleSheet, View } from 'react-native';
+import { TaskBoard } from '@/src/components/TaskBoard';
 
 export default function HomeScreen() {
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={{padding: 10}}>
-        <TaskList />
-      </View>
-    </SafeAreaView>
+    <View style={styles.container}>
+        <TaskBoard />
+        <StatusBar barStyle={'light-content'} />
+    </View>
   );
 }
 
