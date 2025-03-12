@@ -1,8 +1,10 @@
-import { View, Text, StyleSheet, FlatList } from "react-native";
+import { View, Text, StyleSheet, FlatList, TextInput, Button } from "react-native";
 import { TaskListItem } from "./TaskListItem";
 import { useState, useEffect } from "react";
+import { Colors } from "../constants/Colors";
 export const TaskList = () => {
   const [tasks, setTasks] = useState<{ description: string }[]>([]);
+  const [newTask, setNewTask] = useState<string>("");
 
   useEffect(() => {
     setTasks([
@@ -19,6 +21,14 @@ export const TaskList = () => {
         renderItem={({ item }) => <TaskListItem task={item} />}
         contentContainerStyle={styles.list}
       />
+      <TextInput
+        placeholder="Add a task"
+        style={styles.input}
+        value={newTask}
+        onChangeText={setNewTask}
+        placeholderTextColor={'gray'}
+      />
+      <Button title="Add" onPress={() => setTasks([...tasks, { description: newTask }])} />
     </View>
   )
 };
@@ -37,5 +47,12 @@ const styles = StyleSheet.create({
   },
   list: {
     gap: 5,
+  },
+  input: {
+    backgroundColor: Colors.dark.black,
+    padding: 15,
+    borderRadius: 5,
+    marginVertical: 10,
+    color: '#fff',
   },
 });
