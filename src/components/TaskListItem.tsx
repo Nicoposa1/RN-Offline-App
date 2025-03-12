@@ -1,14 +1,17 @@
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, Pressable } from 'react-native'
 import React from 'react'
 import { Colors } from '../constants/Colors';
 import AntDesign from '@expo/vector-icons/AntDesign';
+import { Link } from 'expo-router';
 
 export const TaskListItem = ({ task }: { task: { description: string } }) => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>{task.description}</Text>
-      <AntDesign name="close" size={16} color="gray" />
-    </View>
+    <Link href="/details" asChild>
+      <Pressable style={styles.container}>
+        <Text style={styles.text}>{task.description}</Text>
+        <AntDesign name="close" size={16} color="gray" />
+      </Pressable>
+    </Link>
   )
 }
 
@@ -23,6 +26,6 @@ const styles = StyleSheet.create({
   },
   text: {
     color: 'white',
-    fontSize: 16, 
+    fontSize: 16,
   },
 });
