@@ -4,9 +4,14 @@ import { Colors } from '../constants/Colors';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { Link } from 'expo-router';
 
-export const TaskListItem = ({ task }: { task: { description: string } }) => {
+export const TaskListItem = ({ task }: {
+  task: {
+    id: string;
+    description: string
+  }
+}) => {
   return (
-    <Link href="/details" asChild>
+    <Link href={`/${task.id}`} asChild>
       <Pressable style={styles.container}>
         <Text style={styles.text}>{task.description}</Text>
         <AntDesign name="close" size={16} color="gray" />

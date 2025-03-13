@@ -5,6 +5,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
+import RealmCustomProvider from '@/src/provider/Realm';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
 
@@ -29,7 +30,9 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={DarkTheme}>
-      <Stack screenOptions={{}}></Stack>
+      <RealmCustomProvider>
+        <Stack screenOptions={{}}></Stack>
+      </RealmCustomProvider>
       <StatusBar style="light" />
     </ThemeProvider>
   );

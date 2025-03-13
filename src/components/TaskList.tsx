@@ -3,18 +3,21 @@ import { TaskListItem } from "./TaskListItem";
 import { useState, useEffect } from "react";
 import { Colors } from "../constants/Colors";
 export const TaskList = () => {
-  const [tasks, setTasks] = useState<{ description: string }[]>([]);
+  const [tasks, setTasks] = useState<{ id: string, description: string }[]>([]);
   const [newTask, setNewTask] = useState<string>("");
 
   useEffect(() => {
     setTasks([
-      { description: "First task" },
-      { description: "Second task" },
+      { id: '1', description: "First task" },
+      { id: "2", description: "Second task" },
     ]);
   }, []);
 
   const createTask = () => {
-    setTasks([...tasks, { description: newTask }]);
+    setTasks([...tasks, {
+      id: tasks.length + 1,
+      description: newTask
+    }]);
     setNewTask("");
   }
 
@@ -24,6 +27,7 @@ export const TaskList = () => {
       <FlatList
         data={tasks}
         renderItem={({ item }) => <TaskListItem task={item} />}
+        keyExtractor={(item) => item.id}
         contentContainerStyle={styles.list}
       />
       <TextInput
