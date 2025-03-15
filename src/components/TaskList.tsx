@@ -2,22 +2,22 @@ import { View, Text, StyleSheet, FlatList, TextInput, Button } from "react-nativ
 import { TaskListItem } from "./TaskListItem";
 import { useState, useEffect } from "react";
 import { Colors } from "../constants/Colors";
+import { useQuery, useRealm } from "@realm/react";
+import Task from "../models/Task";
 export const TaskList = () => {
-  const [tasks, setTasks] = useState<{ id: string, description: string }[]>([]);
+  const realm = useRealm();
+  const tasks = useQuery(Task)
   const [newTask, setNewTask] = useState<string>("");
 
-  useEffect(() => {
-    setTasks([
-      { id: '1', description: "First task" },
-      { id: "2", description: "Second task" },
-    ]);
-  }, []);
 
   const createTask = () => {
-    setTasks([...tasks, {
-      id: tasks.length + 1,
-      description: newTask
-    }]);
+    realm.write(() => {
+      realm.create("Task", {
+        description: newTask,
+        user_id: "1",
+      });
+    });  
+    
     setNewTask("");
   }
 
@@ -26,8 +26,11 @@ export const TaskList = () => {
       <Text style={styles.title}>Todo</Text>
       <FlatList
         data={tasks}
-        renderItem={({ item }) => <TaskListItem task={item} />}
-        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => <TaskListItem task={{
+          id: item._id.toString(),
+          description: item.description
+        }} />}
+        keyExtractor={(item) => item._id.toString()}
         contentContainerStyle={styles.list}
       />
       <TextInput

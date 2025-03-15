@@ -1,15 +1,14 @@
-import { BSON, Realm, ObjectSchema } from "realm";
+import { BSON, Realm } from "realm";
 
 export class Task extends Realm.Object<Task> {
-  id!: BSON.ObjectId;
+  _id: BSON.ObjectId = new BSON.ObjectId();
   description!: string;
+  isDone: boolean = false;
+  createdAt: Date = new Date();
 
-  static schema: ObjectSchema = {
-    name: "Task",
-    primaryKey: "_id",
-    properties: {
-      _id: "objectId",
-      description: "string"
-    }
-  }
+  user_id!: string;
+
+  static primaryKey = "_id";
 }
+
+export default Task;
