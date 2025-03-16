@@ -23,7 +23,7 @@ export const TaskList = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Todo</Text>
+      <Text style={styles.title}>Todos</Text>
       <FlatList
         data={tasks}
         renderItem={({ item }) => <TaskListItem task={{
