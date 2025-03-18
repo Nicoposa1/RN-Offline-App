@@ -9,7 +9,6 @@ export const TaskList = () => {
   const tasks = useQuery(Task)
   const [newTask, setNewTask] = useState<string>("");
 
-
   const createTask = () => {
     realm.write(() => {
       realm.create("Task", {
@@ -26,10 +25,7 @@ export const TaskList = () => {
       <Text style={styles.title}>Todos</Text>
       <FlatList
         data={tasks}
-        renderItem={({ item }) => <TaskListItem task={{
-          id: item._id.toString(),
-          description: item.description
-        }} />}
+        renderItem={({ item }) => <TaskListItem task={item} />}
         keyExtractor={(item) => item._id.toString()}
         contentContainerStyle={styles.list}
       />
