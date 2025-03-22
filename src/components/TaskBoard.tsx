@@ -8,6 +8,7 @@ export const TaskBoard = () => {
     <View style={{ padding: 10, flex: 1 }}>
       <LinearGradient
         colors={['#8711c1', '#2472fc']}
+        
         style={StyleSheet.absoluteFill}
       />
       <SafeAreaView>
